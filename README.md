@@ -1,4 +1,4 @@
-# Blazor Playground
+# .NET Core Playground
 
-This is my first project using Blazor WebAssembly technology for web UI creation.
+This will be my .net core test bench. 
 
