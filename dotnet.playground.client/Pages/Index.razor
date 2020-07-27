@@ -1,0 +1,47 @@
+﻿@page "/"
+@using dotnet.playground.domain.Entities
+@inject HttpClient HttpClient
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Maurizio Attanasi's dotNet Core Playground</h1>
+
+<p>Message: @Configuration["URI"]</p>
+
+@if(Forecasts is null){
+    <p><em>Loading...</em></p>
+}
+else {
+<table>
+    <thead>
+        <th>Date</th>
+        <th>Temperature [°C]</th>
+        <th>Temperature [°F]</th>
+        <th>Summary</th>
+    </thead>
+    <tbody>
+        @foreach (var forecast in Forecasts)
+        {
+            <tr>
+                <td>@forecast.Date</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+}
+
+
+@code { 
+
+    private List<WeatherForecast> Forecasts { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(500);
+        Forecasts = await HttpClient.GetFromJsonAsync<List<WeatherForecast>>($"{Configuration["URI"]}/WeatherForecast/GetAll?page=1&pageSize=10");
+    }
+}

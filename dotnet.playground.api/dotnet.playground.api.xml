@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>dotnet.playground.api</name>
+    </assembly>
+    <members>
+        <member name="T:dotnet.playground.api.controllers.WeatherForecastController">
+            <summary>
+            Fake Weather Forecast controller
+            </summary>
+        </member>
+        <member name="M:dotnet.playground.api.controllers.WeatherForecastController.#ctor(MediatR.IMediator)">
+            <summary>
+            Weather Forecast controller
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:dotnet.playground.api.controllers.WeatherForecastController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns all the weather forcasts
+            </summary>
+            <param name="page">Index of the first element to return</param>
+            <param name="pageSize">Number of elements to return</param>
+            <returns></returns>
+        </member>
+        <member name="T:dotnet.playground.api.Features.Weather.GetAll">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:dotnet.playground.api.Features.Weather.GetAll.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+        </member>
+    </members>
+</doc>
