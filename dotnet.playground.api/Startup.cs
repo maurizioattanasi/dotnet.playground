@@ -7,6 +7,7 @@ using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +37,7 @@ namespace dotnet.playground.api
 
             // Hellang.Middleware.ProblemDetails package
             services.AddProblemDetails();
-            
+
             // Registering Swagger Generator
             services.AddSwaggerGen(c =>
             {
@@ -45,7 +46,7 @@ namespace dotnet.playground.api
                     Title = "Blazor Test Service API",
                     Version = "v1",
                     Description = "Blazor Test Service api",
-                    Contact = new OpenApiContact() { Name = "Maurizio Attanasi", Email = "maurizio.attanasi@gmail.com", Url = new Uri("https://maurizioattanasi.blogspot.com/") }
+                    Contact = new OpenApiContact() { Name = "Maurizio Attanasi", Email = "maurizio.attanasi@gmail.com", Url = new Uri("http://maurizioattanasi.it/") }
                 });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -117,8 +118,18 @@ namespace dotnet.playground.api
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
             });
+
+            // using Microsoft.AspNetCore.HttpOverrides;
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseAuthentication();
         }
     }
 #pragma warning restore CS1591
